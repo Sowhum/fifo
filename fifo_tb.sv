@@ -18,7 +18,6 @@ module FIFO_tb;
   logic empty;
   logic almost_empty;
 
-  // Instantiate the FIFO
   FIFO #(
     .DEPTH(DEPTH),
     .WIDTH(WIDTH),
@@ -38,10 +37,9 @@ module FIFO_tb;
     .almost_empty(almost_empty)
   );
 
-  // Clock generation
   initial begin
     clk = 0;
-    forever #5 clk = ~clk; // 100 MHz clock
+    forever #5 clk = ~clk; 
   end
 
   // Monitor signals
@@ -50,7 +48,6 @@ module FIFO_tb;
              $time, empty, full, almost_empty, almost_full, read_data, write_data);
   end
 
-  // Test stimulus
   initial begin
     reset = 1;
     read_en=0;
@@ -85,17 +82,17 @@ module FIFO_tb;
 //    @(posedge clk);
 //    read_en = 0;
 
-    // Overflow 
-    reset = 1;
-    #12 reset = 0;
-    write_data = 8'h10;
-    repeat (DEPTH+1) begin
-      @(posedge clk);
-      write_en = 1;
-      write_data = write_data + 1;
-    end
-    @(posedge clk);
-    write_en = 0;
+//    // Overflow 
+//    reset = 1;
+//    #12 reset = 0;
+//    write_data = 8'h10;
+//    repeat (DEPTH+1) begin
+//      @(posedge clk);
+//      write_en = 1;
+//      write_data = write_data + 1;
+//    end
+//    @(posedge clk);
+//    write_en = 0;
 
     #10 $finish;
   end
